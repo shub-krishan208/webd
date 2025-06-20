@@ -1,0 +1,415 @@
+/* css resetter */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+.nbg-img {
+  background-image: url("./assets/bg1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 0;
+  margin-left: 0;
+  position: fixed;
+}
+
+.nblur-bg {
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(20px);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.center-wrap {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#blank {
+  width: 850px;
+  height: 300px;
+}
+
+.container {
+  width: 850px;
+  height: 2700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border: 3px solid white;
+}
+
+.title {
+  height: 449px;
+  width: 700px;
+  border: 3px solid white;
+  margin: 2px;
+}
+
+.heading {
+  height: 100px;
+  margin: 2px;
+  border: 3px solid white;
+  color: bisque;
+}
+
+#head-style {
+  text-align: center;
+}
+.contract-info {
+  height: 300px;
+  margin: 2px;
+  border: 3px solid white;
+  color: bisque;
+}
+
+.connect-button {
+  align-self: flex-start;
+  margin: 2px;
+  height: 34px;
+  width: 220px;
+  border: 3px solid white;
+  color: bisque;
+  padding: 5px;
+}
+
+.account-info {
+  width: 700px;
+  height: 140px;
+  border: 3px solid white;
+  color: bisque;
+  padding-left: 7px;
+}
+
+.toggle-account-info {
+  margin: 2px;
+  margin-top: 0px;
+  width: 700px;
+  height: 34px;
+  border: 3px solid white;
+  color: bisque;
+  padding: 5px;
+}
+
+/* 
+DO NOT DISTURB!!
+I have no idea how this thing works, but that it works. So, won't tamper with it for a while.
+*/
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f29f05;
+}
+.toggle-icon {
+  width: 0.8em;
+  height: 0.8em;
+  fill: currentColor;
+  transition: transform 0.2s ease-out;
+  transform: rotate(-90deg);
+}
+/* Rotate when expanded */
+.toggle-button[aria-expanded="true"] .toggle-icon {
+  transform: rotate(0deg);
+}
+
+/* 
+END of do not tamper code, lol.
+*/
+
+.contract-options {
+  width: 700px;
+  height: 1700px;
+  border: 3px solid white;
+  margin: 2px;
+}
+
+.info-options {
+  margin: 2px;
+  border: 3px solid white;
+  width: 690px;
+  height: 100px;
+}
+
+.info-txt {
+  padding-left: 5px;
+  text-size-adjust: 0.5em;
+  font-weight: bolder;
+  color: beige !important;
+}
+
+.info-buttons-wrapper {
+  width: 690px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.info-buttons {
+  width: 200px;
+  height: 34px;
+  color: blanchedalmond;
+  background-color: rebeccapurple;
+  margin: 3px;
+}
+
+.destroy-options {
+  margin: 2px;
+  border: 3px solid white;
+  width: 690px;
+  height: 200px;
+}
+
+.destroy-txt {
+  padding-left: 5px;
+  text-size-adjust: 0.5em;
+  font-weight: bolder;
+  color: beige !important;
+}
+
+.destruction-buttons-wrapper {
+  width: 690px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.destruction-buttons {
+  width: 200px;
+  height: 34px;
+  color: blanchedalmond;
+  background-color: rebeccapurple;
+  margin: 3px;
+}
+
+#isDestroyed {
+  background-color: olivedrab;
+}
+
+.emergency-options {
+  margin: 2px;
+  border: 3px solid white;
+  width: 690px;
+  height: 200px;
+}
+
+.emergency-txt {
+  padding-left: 5px;
+  text-size-adjust: 0.5em;
+  font-weight: bolder;
+  color: beige !important;
+}
+
+.emergency-button-wrapper {
+  width: 690px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.emergency-buttons {
+  width: 200px;
+  height: 34px;
+  color: blanchedalmond;
+  background-color: rebeccapurple;
+  margin: 3px;
+}
+
+#contractPaused {
+  background-color: olivedrab;
+}
+
+.admin-options {
+  margin: 2px;
+  border: 3px solid white;
+  width: 690px;
+  height: 200px;
+}
+
+.admin-txt {
+  padding-left: 5px;
+  text-size-adjust: 0.5em;
+  font-weight: bolder;
+  color: beige !important;
+}
+
+.admin-button-wrapper {
+  width: 690px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.admin-buttons {
+  width: 200px;
+  height: 34px;
+  color: blanchedalmond;
+  background-color: rebeccapurple;
+  margin: 3px;
+}
+
+#owner {
+  background-color: olivedrab;
+  color: blanchedalmond;
+}
+
+.burn-options {
+  margin: 2px;
+  border: 3px solid white;
+  width: 690px;
+  height: 200px;
+}
+
+.burn-txt {
+  padding-left: 5px;
+  text-size-adjust: 0.5em;
+  font-weight: bolder;
+  color: beige !important;
+}
+
+.burn-button-wrapper {
+  width: 690px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.burn-buttons {
+  width: 200px;
+  height: 34px;
+  color: blanchedalmond;
+  background-color: rebeccapurple;
+  margin: 3px;
+}
+
+.mint-options {
+  margin: 2px;
+  border: 3px solid white;
+  width: 690px;
+  height: 200px;
+}
+
+.mint-txt {
+  padding-left: 5px;
+  text-size-adjust: 0.5em;
+  font-weight: bolder;
+  color: beige !important;
+}
+
+.mint-button-wrapper {
+  width: 690px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.mint-buttons {
+  width: 200px;
+  height: 34px;
+  color: blanchedalmond;
+  background-color: rebeccapurple;
+  margin: 3px;
+}
+
+#cap,
+#mintingPaused,
+#remainingMintableSupply {
+  background-color: olivedrab;
+  color: blanchedalmond;
+}
+
+.recovery-options {
+  margin: 2px;
+  border: 3px solid white;
+  width: 690px;
+  height: 200px;
+}
+
+.recovery-txt {
+  padding-left: 5px;
+  text-size-adjust: 0.5em;
+  font-weight: bolder;
+  color: beige !important;
+}
+
+.recovery-button-wrapper {
+  width: 690px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.recovery-buttons {
+  width: 200px;
+  height: 60px;
+  color: blanchedalmond;
+  background-color: rebeccapurple;
+  margin: 3px;
+}
+
+.erc-options {
+  margin: 2px;
+  border: 3px solid white;
+  width: 690px;
+  height: 200px;
+}
+
+.erc-txt {
+  padding-left: 5px;
+  text-size-adjust: 0.5em;
+  font-weight: bolder;
+  color: beige !important;
+}
+
+.erc-button-wrapper {
+  width: 690px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.erc-buttons {
+  width: 200px;
+  height: 34px;
+  color: blanchedalmond;
+  background-color: rebeccapurple;
+  margin: 3px;
+}

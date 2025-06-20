@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="shub-krishan208" />
+    <meta
+      name="description"
+      content="CrazeToken is an ERC20 token, test project created for CGS webx selection process."
+    />
+    <meta
+      name="keywords"
+      content="CrazeToken, ERC20, CGS webx, blockchain, cryptocurrency, webx"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./assets/craze.svg" />
+    <title>CrazeToken v1.1</title>
+  </head>
+  <body>
+    <div class="bg-img"><div class="blur-bg"></div></div>
+    <div class="center-wrap">
+      <div class="container">
+        <div id="blank">Hii you found me, Lol!</div>
+        <div class="title">
+          <div class="heading"><span id="head-style">Crazy Contract</span></div>
+          <div class="contract-info">
+            <p>The contract info is present here.</p>
+          </div>
+          <div class="connect-button">Connect</div>
+        </div>
+
+        <div id="toggle-panel" class="account-info toggle">
+          <p>
+            Here Account info will be shown, Basically, info from getUserInfo()
+          </p>
+          <ul>
+            <li>public key</li>
+            <li>account balance</li>
+            <li>allowance</li>
+          </ul>
+        </div>
+        <div class="contract-options">
+          <div class="info-options info-txt">
+            <p>Info Options:</p>
+            <div id="info-button-wrapper">
+              <button id="getUserInfo" class="info-buttons">
+                Get User Info
+              </button>
+            </div>
+          </div>
+          <div class="erc-options erc-txt">
+            <!-- 
+            standard functions are:
+            1. transfer
+            2. transferfrom
+            3. approve
+            4. allowance
+            5. balanceof
+            6. totalsupply
+            7. decimals
+            8. name
+            9. symbol
+            -->
+            <p>Standard ERC20 functions:</p>
+
+            <div id="erc-button-wrapper">
+              <button id="transfer" class="erc-buttons">Transfer</button>
+              <button id="transferFrom" class="erc-buttons">
+                Transfer from
+              </button>
+              <button id="approve" class="erc-buttons">Approve</button>
+              <button id="allowance" class="erc-buttons">Allowance</button>
+              <button id="balanceOf" class="erc-buttons">Balance of</button>
+              <button id="totalSupply" class="erc-buttons">
+                Total supply yet?
+              </button>
+              <button id="decimals" class="erc-buttons">
+                Decimals in the inputs?
+              </button>
+              <button id="name" class="erc-buttons">Name of contract?</button>
+              <button id="symbol" class="erc-buttons">
+                Symbol for the contract?
+              </button>
+            </div>
+          </div>
+          <div class="admin-options admin-txt">
+            <!-- 
+            admin options are:
+            1. transferOwnership
+            2. renounceOwnership
+            3. owner
+             -->
+            <p>Admin Options <em>ALERT!</em> :</p>
+            <div id="admin-button-wrapper">
+              <button id="transferOwnership" class="admin-buttons">
+                Transfer
+              </button>
+              <button id="renounceOwnership" class="admin-buttons">
+                I don't want this anymore!
+              </button>
+              <button id="owner" class="admin-button">Who owns this?</button>
+            </div>
+          </div>
+          <div class="mint-options mint-txt">
+            <!-- 
+            mint options are:
+            1. mint
+            2. cap
+            3. pauseMinting
+            4. unauseMinting
+            5. mintingPaused
+            6. remainingMintableSupply
+            -->
+            <p>Mint some tokens <em>OWNER only</em>:</p>
+            <div id="mint-button-wrapper">
+              <button id="mint" class="mint-buttons">Mint</button>
+              <button id="pauseMinting" class="mint-buttons">
+                Pause minting
+              </button>
+              <button id="unpauseMinting" class="mint-buttons">
+                Unpause Minting
+              </button>
+              <button id="mintingPaused" class="mint-buttons">
+                Is minting paused?
+              </button>
+              <button id="cap" class="mint-buttons">What's the max?</button>
+              <button id="remainingMintableSupply" class="mint-buttons">
+                How much more can I do?
+              </button>
+            </div>
+          </div>
+          <div class="burn-options burn-txt">
+            <!-- 
+            1. burn
+            2. burnFrom
+             -->
+            <p>Burn some tokens:</p>
+            <div id="burn-button-wrapper">
+              <button id="burn" class="burn-buttons">Burn mine</button>
+              <button id="burnFrom" class="burn-buttons">Burn from</button>
+            </div>
+          </div>
+          <div class="emergency-options emergency-txt">
+            <!-- 
+            emergency functions:
+            1. emergencyPause
+            2. unpause
+            3. contractPaused 
+            -->
+            <p>Emergency Options:</p>
+            <div id="emergency-button-wrapper">
+              <button id="emergencyPause" class="emergency-buttons">
+                Wait, Pause!
+              </button>
+              <button id="unpause" class="emergency-buttons">
+                Go on, unpause.
+              </button>
+              <button id="contractPaused" class="emergency-buttons">
+                Is this Paused??
+              </button>
+            </div>
+          </div>
+          <div class="destroy-options destroy-txt">
+            <!-- Destroy options will have the following buttons:
+             1. proposeDestruction
+             2. cancelDestruction
+             3. executeDEstruction
+             4. isDestroyed
+              -->
+            <p>Destroy:</p>
+            <div id="destruction-buttons-wrapper">
+              <button id="proposeDestruction" class="destruction-buttons">
+                Propose Destruction
+              </button>
+              <button id="cancelDestruction" class="destruction-buttons">
+                Cancel Destruction</button
+              ><button id="executeDestruction" class="destruction-buttons">
+                Destroy Now!</button
+              ><button id="isDestroyed" class="destruction-buttons">
+                Is this destroyed?
+              </button>
+            </div>
+          </div>
+          <div class="recovery-options recovery-txt">
+            <!-- 
+            1. recoverERC20
+            2. recoverETH
+             -->
+            <p>Recovery options <em>Owner only</em>:</p>
+            <div id="recovery-button-wrapper">
+              <button id="recoverERC20" class="recovery-buttons">
+                Recover my tokens.
+              </button>
+              <button id="recoverETH" class="recovery-buttons">
+                Recover my ETH.
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
+x

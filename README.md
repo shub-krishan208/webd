@@ -1,13 +1,8 @@
-# Sample Hardhat Project
+# Craze Token - WebX
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+The webx selection task for iitkgp/CGS
+I've completed making a functional smartcontract in solidity (craze.sol) also have a weird but organized structure for frontend (basically, a div hell).
 
-Try running some of the following tasks:
+Once, I somehow figure out to connect the backend and frontend, the project CrazeToken v1.0 will be done ;)
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
-```
+Well, if you wanna see whatever frontend I'm done with, clone the repo and simply open ./frontend/index.html
