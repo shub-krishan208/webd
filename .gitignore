@@ -1,15 +1,16 @@
 node_modules
 .env
 null-README.md
-
 #personal files
 task-summary.md 
 test-contracts
+test.js
 
 
 # Hardhat files
 /cache
 /artifacts
+/deployments
 
 # TypeChain files
 /typechain
