@@ -72,7 +72,7 @@ async function main() {
   };
 
   const filePath = `${deploymentsDir}/Craze.json`;
-  fs.writeFileSync(filePath, JSON.strgify(deploymentInfo, null, 2));
+  fs.writeFileSync(filePath, JSON.stringify(deploymentInfo, null, 2));
   console.log(`Deployment info saved to: ${filePath}`);
   // --- End: Save Deployment Information ---
 }

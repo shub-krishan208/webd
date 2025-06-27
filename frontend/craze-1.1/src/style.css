@@ -49,7 +49,7 @@ body {
 
 .container {
   width: 850px;
-  height: 2700px;
+  height: 3000px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,7 +58,7 @@ body {
 }
 
 .title {
-  height: 449px;
+  height: 475px;
   width: 700px;
   border: 3px solid white;
   margin: 2px;
@@ -82,18 +82,29 @@ body {
 }
 
 .connect-button {
+  display: flex;
+  flex-direction: row;
   align-self: flex-start;
   margin: 2px;
-  height: 34px;
-  width: 220px;
+  height: 60px;
+  width: 690px;
   border: 3px solid white;
   color: bisque;
   padding: 5px;
 }
 
+.connectInfo {
+  margin-left: 10px;
+}
+
+.metamask-not-installed {
+  width: 230px;
+  background-color: #9e0000;
+}
+
 .account-info {
   width: 700px;
-  height: 140px;
+  height: 175px;
   border: 3px solid white;
   color: bisque;
   padding-left: 7px;
@@ -141,7 +152,7 @@ END of do not tamper code, lol.
 
 .contract-options {
   width: 700px;
-  height: 1700px;
+  height: 2000px;
   border: 3px solid white;
   margin: 2px;
 }
@@ -150,7 +161,7 @@ END of do not tamper code, lol.
   margin: 2px;
   border: 3px solid white;
   width: 690px;
-  height: 100px;
+  height: 150px;
 }
 
 .info-txt {
@@ -171,9 +182,9 @@ END of do not tamper code, lol.
 
 .info-buttons {
   width: 200px;
-  height: 34px;
+  height: 60px;
   color: blanchedalmond;
-  background-color: rebeccapurple;
+  background-color: darkslategray;
   margin: 3px;
 }
 
@@ -202,14 +213,14 @@ END of do not tamper code, lol.
 
 .destruction-buttons {
   width: 200px;
-  height: 34px;
+  height: 60px;
   color: blanchedalmond;
-  background-color: rebeccapurple;
+  background-color: darkslategrey;
   margin: 3px;
 }
 
 #isDestroyed {
-  background-color: olivedrab;
+  background-color: #1f0091;
 }
 
 .emergency-options {
@@ -237,14 +248,14 @@ END of do not tamper code, lol.
 
 .emergency-buttons {
   width: 200px;
-  height: 34px;
+  height: 60px;
   color: blanchedalmond;
-  background-color: rebeccapurple;
+  background-color: darkslategray;
   margin: 3px;
 }
 
 #contractPaused {
-  background-color: olivedrab;
+  background-color: #1f0091;
 }
 
 .admin-options {
@@ -272,14 +283,14 @@ END of do not tamper code, lol.
 
 .admin-buttons {
   width: 200px;
-  height: 34px;
+  height: 60px;
   color: blanchedalmond;
-  background-color: rebeccapurple;
+  background-color: darkslategray;
   margin: 3px;
 }
 
 #owner {
-  background-color: olivedrab;
+  background-color: #1f0091;
   color: blanchedalmond;
 }
 
@@ -308,9 +319,9 @@ END of do not tamper code, lol.
 
 .burn-buttons {
   width: 200px;
-  height: 34px;
+  height: 60px;
   color: blanchedalmond;
-  background-color: rebeccapurple;
+  background-color: darkslategray;
   margin: 3px;
 }
 
@@ -339,16 +350,16 @@ END of do not tamper code, lol.
 
 .mint-buttons {
   width: 200px;
-  height: 34px;
+  height: 60px;
   color: blanchedalmond;
-  background-color: rebeccapurple;
+  background-color: darkslategray;
   margin: 3px;
 }
 
 #cap,
 #mintingPaused,
 #remainingMintableSupply {
-  background-color: olivedrab;
+  background-color: #1f0091;
   color: blanchedalmond;
 }
 
@@ -379,7 +390,7 @@ END of do not tamper code, lol.
   width: 200px;
   height: 60px;
   color: blanchedalmond;
-  background-color: rebeccapurple;
+  background-color: darkslategray;
   margin: 3px;
 }
 
@@ -387,7 +398,7 @@ END of do not tamper code, lol.
   margin: 2px;
   border: 3px solid white;
   width: 690px;
-  height: 200px;
+  height: 300px;
 }
 
 .erc-txt {
@@ -408,8 +419,27 @@ END of do not tamper code, lol.
 
 .erc-buttons {
   width: 200px;
-  height: 34px;
+  height: 60px;
   color: blanchedalmond;
-  background-color: rebeccapurple;
+  background-color: darkslategray;
+  margin: 3px;
+}
+
+.test-block {
+  margin: 2px;
+  border: 3px solid white;
+  width: 690px;
+  height: 200px;
+  padding-left: 5px;
+  text-size-adjust: 0.5em;
+  font-weight: bolder;
+  color: beige !important;
+}
+
+#test-button {
+  width: 200px;
+  height: 60px;
+  color: blanchedalmond;
+  background-color: darkslategray;
   margin: 3px;
 }
