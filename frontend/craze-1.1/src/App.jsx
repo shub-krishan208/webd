@@ -104,78 +104,7 @@ function App() {
     await getContractInfo();
   });
   
-  async function owner() {
-    if(contractCheck()) {
-      try {
-        const owner = await contract.owner();
-        console.log('Contract owner: ', owner);
-        alert('Contract owner: '+ owner);
-      } catch (err) {
-        console.log('Unable to fetch owner: ',err);
-      }
-    }
-  }
-
-  async function remainingMintableSupply () {
-    if(contractCheck()) {
-      try {
-        const supply = await contract.remainingMintableSupply();
-        console.log('Remaining mintable supply: ', supply.toString());
-        alert('Remaining mintable supply: ' + supply.toString());
-      } catch (err) {
-        console.log('Error: ', err);
-      }
-    }
-  }
-  
-  async function capF() {
-    if(contractCheck()) {
-      try {
-        const cap = await contract.cap();
-        console.log('Supply Cap: ', cap.toString());
-        alert('Supply Cap: ' + cap.toString());
-      } catch (err){
-        console.log('Error: ', err);
-      }
-    }
-  }
-  
-  async function mintingPaused() {
-    if(contractCheck()) {
-      try {
-        const x = await contract.mintingPaused();
-        console.log('Minting Paused: ', x);
-        alert('Minting Paused: ' + x);
-      } catch (err){
-        console.log('Error: ', err);
-      }
-    }
-  }
-  
-  async function isDestroyed() {
-    if(contractCheck()) {
-      try {
-        const x = await contract.isDestroyed();
-        console.log('Contract Destroyed: ', x);
-        alert('Contract Destroyed: ' + x);
-      } catch (err){
-        console.log('Error: ', err);
-      }
-    }
-  }
-  
-  async function contractPaused(){
-    if(contractCheck()) {
-      try {
-        const x = await contract.contractPaused();
-        console.log('Contract Paused: ', x);
-        alert('Contract Paused: ' + x);
-      } catch (err){
-        console.log('Error: ', err);
-      }
-    }
-  }
-  
+  //info options
   
   async function getContractInfo() {
     if(contractCheck()){
@@ -238,6 +167,461 @@ function App() {
     }
 
 
+  }
+
+  //erc20 standard functions
+
+  const transfer = async () => {
+    if(contractCheck()){
+      const addr = document.getElementById("erc-transfer-inputs").value.trim();
+      const amt = document.getElementById("erc-amount1-inputs").value.trim();
+      if(!ethers.utils.isAddress(addr)) {
+        alert('Invalid Address!.');
+        return;
+      }
+      if(amt===''||isNaN(amt)||parseFloat(amt)<=0){
+        alert('Please enter a valid amount to transfer.');
+        return;
+      }
+      try {
+        const tx = await contract.transfer(addr, amt);
+        console.log('Transferred '+ amt + ' tokens to ' + addr + ', id: '+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+
+  const transferFrom = async () => {
+    if(contractCheck()){
+      const addr1 = document.getElementById("transferfrom-from-inputs").value.trim();
+      const addr2 = document.getElementById("transferfrom-to-inputs").value.trim();
+      const amt = document.getElementById("erc-amount2-inputs").value.trim();
+      if(!ethers.utils.isAddress(addr1) || !ethers.utils.isAddress(addr2)) {
+        alert('Invalid Address!.');
+        return;
+      }
+      if(amt===''||isNaN(amt)||parseFloat(amt)<=0){
+        alert('Please enter a valid amount to transfer.');
+        return;
+      }
+      try {
+        const tx = await contract.transferFrom(addr1,addr2, amt);
+        console.log('Transferred '+ amt + ' tokens to ' + addr2 + ' from ' + addr1 +' , id: '+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+  const approve = async () => {
+    if(contractCheck()){
+      const spender = document.getElementById("approve-spender-inputs").value.trim();
+      const amt = document.getElementById("approve-amount-inputs").value.trim();
+      if(!ethers.utils.isAddress(spender)) {
+        alert('Invalid address.');
+        return;
+      }
+      if(amt === ''|| isNaN(amt)||parseFloat(amt)<=0){
+        alert('Please enter a valid amount to approve.');
+        return;
+      }
+      try {
+        const tx = await contract.approve(spender, amt);
+        console.log('Spender ' + spender + ' is approved of amount: ' + amt +', id: '+tx.hash);
+        alert('Spender ' + spender + ' is approved of amount: ' + amt +', id: '+tx.hash);
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+  const allowance = async () => {
+    if(contractCheck()){
+      const owner = document.getElementById("allowance-owner-inputs").value.trim();
+      const spender = document.getElementById("allowance-spender-inputs").value.trim();
+      if(!ethers.utils.isAddress(owner) || !ethers.utils.isAddress(spender)) {
+        alert('Invalid address.');
+        return;
+      }
+      try {
+        const tx = await contract.allowance(owner, spender);
+        console.log('Allowance of ' + spender + ' by ' + owner + ' is: ' + tx);
+        alert('Allowance of ' + spender + ' by ' + owner + ' is: ' + tx);
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+  const balanceOf = async () => {
+    if(contractCheck()){
+      const addr = document.getElementById("balanceof-account-inputs").value.trim();
+      if(!ethers.utils.isAddress(addr)) {
+        alert('Invalid address.');
+        return;
+      }
+      try {
+        const tx = await contract.balanceOf(addr);
+        console.log('Balance of ' + addr + 'is : '+ tx);
+        alert('Balance of ' + addr + 'is : '+ tx);
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+  const totalSupply = async () => {
+    if(contractCheck()){
+      try {
+        const tx = await contract.totalSupply();
+        console.log('Total Supplied: ', tx);
+        alert('Total Supplied: ' + tx);
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+  const decimals = async () => {
+    if(contractCheck()){
+      try {
+        const tx = await contract.decimals();
+        console.log('Decimals: ', tx);
+        alert('Decimals: ' + tx);
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+  const name = async () => {
+    if(contractCheck()){
+      try {
+        const tx = await contract.name();
+        console.log('Contract Name: ', tx);
+        alert('Contract Name: ' + tx);
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+  const symbol = async () => {
+    if(contractCheck()){
+      try {
+        const tx = await contract.symbol();
+        console.log('Contract Symbol: ', tx);
+        alert('Contract Symbol: ' + tx);
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+
+
+  //admin buttons
+  const transferOwnership = async() => {
+    if(contractCheck()) {
+      const addr = document.getElementById("admin-inputs").value.trim();
+      if(!ethers.utils.isAddress(addr)) {
+        alert('Invalid address.');
+        return;
+      }
+      try {
+        const tx = await contract.transferOwnership(addr);
+        console.log("Ownership Transferred, id: "+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+
+  const renounceOwnership = async() => {
+    if(contractCheck()) {
+      try {
+        const tx = await contract.renounceOwnership();
+        console.log("Ownership Renounced, id: "+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+
+  const owner = async () => {
+    if(contractCheck()) {
+      try {
+        const owner = await contract.owner();
+        console.log('Contract owner: ', owner);
+        alert('Contract owner: '+ owner);
+      } catch (err) {
+        console.log('Unable to fetch owner: ',err);
+      }
+    }
+  }
+  
+  //mint buttons
+  const mint = async () => {
+    if(contractCheck()) {
+      const addr = document.getElementById("mint-address-inputs").value.trim();
+      const amt = document.getElementById("mint amount-inputs").value.trim();
+      if(!ethers.utils.isAddress(addr)) {
+        alert('Invalid address.');
+        return;
+      }
+      if(amt === '' || isNaN(amt) || parseFloat(amt) <= 0) {
+        alert('Please enter a valid amount to mint.');
+        return;
+      }
+      try {
+        const tx = await contract.mint(addr, amt);
+        console.log("Minted tokens to "+addr+", id: "+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+
+  const pauseMinting = async () => {
+    if(contractCheck()) {
+      try {
+        const tx = await contract.pauseMinting();
+        console.log("Minting Paused, id: "+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (error) {
+        console.log('Error: ', error);
+        
+      }
+    }
+  }
+  const unpauseMinting = async () => {
+    if(contractCheck()) {
+      try {
+        const tx = await contract.unpauseMinting();
+        console.log("Minting Unpaused, id: "+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (error) {
+        console.log('Error: ', error);
+        
+      }
+    }
+  }
+  const mintingPaused = async () => {
+    if(contractCheck()) {
+      try {
+        const x = await contract.mintingPaused();
+        console.log('Minting Paused: ', x);
+        alert('Minting Paused: ' + x);
+      } catch (err){
+        console.log('Error: ', err);
+      }
+    }
+  }
+  const capF = async () => {
+    if(contractCheck()) {
+      try {
+        const cap = await contract.cap();
+        console.log('Supply Cap: ', cap.toString());
+        alert('Supply Cap: ' + cap.toString());
+      } catch (err){
+        console.log('Error: ', err);
+      }
+    }
+    
+  }
+  const remainingMintableSupply = async () => {
+    if(contractCheck()) {
+      try {
+        const supply = await contract.remainingMintableSupply();
+        console.log('Remaining mintable supply: ', supply.toString());
+        alert('Remaining mintable supply: ' + supply.toString());
+      } catch (err) {
+        console.log('Error: ', err);
+      }
+    }
+  }
+
+  //burn buttons
+  const burn = async () =>{
+    const amt = document.getElementById("burn-amount-inputs").value.trim();
+    if(contractCheck()){
+      try {
+        if(amt === '' || isNaN(amt) || parseFloat(amt) <= 0) {
+          alert('Please enter a valid amount to burn.');
+          return;
+        }
+        const tx = await contract.burn(amt);
+        console.log("Burned tokens, id: "+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (err) {
+        console.log('Action failed: ',err);
+      }
+    }
+  }
+
+  const burnFrom = async () => {
+    const addr = document.getElementById("burn-address-inputs").value.trim();
+    const amt = document.getElementById("burn-from-amount-inputs").value.trim();
+    if(contractCheck()){
+      try {
+        if(!ethers.utils.isAddress(addr)) {
+          alert('Invalid address.');
+          return;
+        }
+        if(amt === '' || isNaN(amt) || parseFloat(amt) <= 0) {
+          alert('Please enter a valid amount to burn.');
+          return;
+        }
+        const tx = await contract.burnFrom(addr, amt);
+        console.log("Burned tokens from "+addr+", id: "+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (err) {
+        console.log('Action failed: ',err);
+      }
+    }
+  }
+
+  //emergency buttons
+
+  const emergencyPause = async () => {
+    if(contractCheck){
+      try {
+        const tx = await contract.emergencyPause();
+        console.log("Contract Paused, id: "+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (err) {
+        console.log('Action failed: ',err);
+      }
+    }
+  }
+
+  const unpause = async () => {
+    if(contractCheck){
+      try {
+        const tx = await contract.unpause();
+        console.log("Contract unpaused, id: "+tx.hash);
+        await tx.wait();
+        alert('Action Successful!');
+      } catch (err) {
+        console.log('Action failed: ',err);
+      }
+    }
+  }
+
+  const contractPaused = async () => {
+    if(contractCheck){
+      try {
+        const tx = await contract.contractPaused();
+        console.log("Contract Paused Status: ",tx);
+        await tx.wait();
+        alert('Contract Pause Status: ' + tx);
+      } catch (err) {
+        console.log('Action failed: ',err);
+      }
+    }
+  }
+
+  // destruction buttons
+
+  async function proposeDestruction() {
+    if(contractCheck){
+      try {
+        const tx = await contract.proposeDestruction();
+        console.log('Contract Destruction proposed, id: ', tx.hash);
+        await tx.wait();
+        alert('Action successful!');
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+  async function cancelDestruction() {
+    if(contractCheck){
+      try {
+        const tx = await contract.cancelDestruction();
+        console.log('Contract Destruction cancelled, id: ', tx.hash);
+        await tx.wait();
+        alert('Action successful!');
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+
+  // trying to disable the destroy button if input not available
+  const [inputValue, setInputValue] = useState('');
+  async function executeDestruction() {
+    if(!(inputValue.trim() === '')){
+      
+      const opin = document.querySelector("destroy-inputs").value.trim();
+
+      if(contractCheck){
+        try {
+          const tx = await contract.executeDestruction(opin);
+          console.log('Contract Destroyed, id: ', tx.hash);
+          await tx.wait();
+          alert('Action successful!');
+        } catch (err) {
+          console.log('Action failed: ', err);
+        }
+      }
+      
+    }
+  }
+
+  const isDisbaled = inputValue.trim() === '';
+
+  const isDestroyed = async () => {
+    if(contractCheck()) {
+      try {
+        const x = await contract.isDestroyed();
+        console.log('Contract Destroyed: ', x);
+        alert('Contract Destroyed: ' + x);
+      } catch (err){
+        console.log('Error: ', err);
+      }
+    }
+  }
+  
+  //recovery functions
+
+  const recoverERC20 = async() =>{
+    const [addr, amt] = document.querySelectorAll(".recovery-inp").value.trim();
+    if(contractCheck()) {
+      try {
+        if(!ethers.utils.isAddress(addr)){
+          alert('Invalid Address');
+          return;
+        }
+        const tx = await contract.recoverERC20(addr, amt);
+        console.log('Recovered tokens, id: ', tx.hash);
+        await tx.wait();
+        alert('Transaction successful: '+ tx.hash);
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
+  }
+
+  const recoverETH = async () => {
+    if(contractCheck()) {
+      try {
+        const tx=await contract.recoverETH();
+        console.log('Recovered ETH, id: ', tx.hash);
+        await tx.wait();
+        alert('Transaction successful: ' + tx.hash);
+      } catch (err) {
+        console.log('Action failed: ', err);
+      }
+    }
   }
 
   return (
@@ -305,31 +689,99 @@ function App() {
               <p>Standard ERC20 functions:</p>
 
               <div id="erc-button-wrapper">
-                <button id="transfer" className="erc-buttons">
-                  Transfer
-                </button>
-                <button id="transferFrom" className="erc-buttons">
-                  Transfer from
-                </button>
-                <button id="approve" className="erc-buttons">
-                  Approve
-                </button>
-                <button id="allowance" className="erc-buttons">
-                  Allowance
-                </button>
-                <button id="balanceOf" className="erc-buttons">
+                <div className="transfer-erc">
+                  <button id="transfer" onClick={transfer} className="erc-buttons">
+                    Transfer
+                  </button>
+                  <input
+                    type="text"
+                    placeholder="User Address"
+                    id="erc-transfer-inputs"
+                    className="inputs"
+                  /><input
+                  type="number"
+                  placeholder="Amount"
+                  id="erc-amount1-inputs"
+                  className="inputs"
+                                />
+                </div>
+                <div className="transferFrom-erc">
+                  <button id="transferFrom" onClick={transferFrom} className="erc-buttons">
+                    Transfer from
+                  </button>
+                  {/* <label htmlFor="transferfrom-from-inputs">From:repeat this  </label> */}
+                  <input
+                    type="text"
+                    placeholder="From: User Address"
+                    id="transferfrom-from-inputs"
+                    className="inputs"
+                  />
+                  <input
+                  type="text"
+                  placeholder="To: User Address"
+                  id="transferfrom-to-inputs"
+                  className="inputs"
+                  />
+                  <input
+                  type="number"
+                  placeholder="Amount"
+                  id="erc-amount2-inputs"
+                  className="inputs"
+                  />
+                </div>
+                <div className="approve-erc">
+                  <button id="approve" onClick={approve} className="erc-buttons">
+                    Approve
+                  </button>
+                  <input
+                    type="text"
+                    placeholder="Spender: User Address"
+                    id="approve-spender-inputs"
+                    className="inputs"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Amount"
+                    id="approve-amount-inputs"
+                    className="inputs"
+                  />
+                </div>
+                <div className="allowance-erc">
+                  <button id="allowance" onClick={allowance} className="erc-buttons">
+                    Allowance
+                  </button>
+                  <input
+                    type="text"
+                    placeholder="Owner: User Address"
+                    id="allowance-owner-inputs"
+                    className="inputs"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Spender: User Address"
+                    id="allowance-spender-inputs"
+                    className="inputs"
+                  />
+                </div>
+                <button id="balanceOf" onClick={balanceOf} className="erc-buttons">
                   Balance of
                 </button>
-                <button id="totalSupply" className="erc-buttons">
-                  Total supply yet?
+                <input
+                  type="text"
+                  placeholder="User Address"
+                  id="balanceof-account-inputs"
+                  className="inputs"
+                />
+                <button id="totalSupply" onClick={totalSupply} className="erc-buttons">
+                  Total supply?
                 </button>
-                <button id="decimals" className="erc-buttons">
+                <button id="decimals" onClick={decimals} className="erc-buttons">
                   Decimals
                 </button>
-                <button id="name" className="erc-buttons">
+                <button id="name" onClick={name} className="erc-buttons">
                   Contract Name
                 </button>
-                <button id="symbol" className="erc-buttons">
+                <button id="symbol" onClick={symbol} className="erc-buttons">
                   Contract Symbol
                 </button>
               </div>
@@ -345,10 +797,18 @@ function App() {
                 Admin Options <em>ALERT!</em> :
               </p>
               <div id="admin-button-wrapper">
-                <button id="transferOwnership" className="admin-buttons">
-                  Transfer
-                </button>
-                <button id="renounceOwnership" className="admin-buttons">
+                <div className="owner-transfer">
+                  <button id="transferOwnership"onClick={transferOwnership} className="admin-buttons">
+                    Transfer Owner
+                  </button>
+                  <input
+                  type="text"
+                  placeholder=" Give User Address"
+                  id="admin-inputs"
+                  className="inputs"
+                />
+                </div>
+                <button id="renounceOwnership" onClick={renounceOwnership} className="admin-buttons">
                   Renounce Contract
                 </button>
                 <button id="owner" onClick={owner} className="admin-buttons">
@@ -370,13 +830,27 @@ function App() {
                 Mint some tokens <em>OWNER only</em>:
               </p>
               <div id="mint-button-wrapper">
-                <button id="mint" className="mint-buttons">
-                  Mint
-                </button>
-                <button id="pauseMinting" className="mint-buttons">
+                <div className="mintbox">
+                  <button id="mint" onClick={mint} className="mint-buttons">
+                    Mint
+                  </button>
+                  <input
+                    type="text"
+                    placeholder=" Give User Address"
+                    id="mint-address-inputs"
+                    className="inputs"
+                  />
+                  <input
+                  type="number"
+                  placeholder=" amount"
+                  id="mint amount-inputs"
+                  className="inputs"
+                />
+                </div>
+                <button id="pauseMinting" onClick={pauseMinting} className="mint-buttons">
                   Pause minting
                 </button>
-                <button id="unpauseMinting" className="mint-buttons">
+                <button id="unpauseMinting" onClick={unpauseMinting} className="mint-buttons">
                   Unpause Minting
                 </button>
                 <button id="mintingPaused" onClick={mintingPaused} className="mint-buttons">
@@ -397,12 +871,34 @@ function App() {
              */}
               <p>Burn some tokens:</p>
               <div id="burn-button-wrapper">
-                <button id="burn" className="burn-buttons">
-                  Burn mine
-                </button>
-                <button id="burnFrom" className="burn-buttons">
-                  Burn from
-                </button>
+                <div className="burn-mine">
+                  <button id="burn" onClick={burn} className="burn-buttons">
+                    Burn mine
+                  </button>
+                  <input
+                    type="number"
+                    placeholder="Amount"
+                    id="burn-amount-inputs"
+                    className="inputs"
+                  />
+                </div>
+                <div className="burn-from">
+                  <button id="burnFrom" onClick={burnFrom} className="burn-buttons">
+                    Burn from
+                  </button>
+                  <input
+                    type="text"
+                    placeholder="User Address"
+                    id="burn-address-inputs"
+                    className="inputs"
+                  />
+                  <input
+                  type="number"
+                  placeholder="Amount"
+                  id="burn-from-amount-inputs"
+                  className="inputs"
+                  />
+                </div>
               </div>
             </div>
             <div className="emergency-options emergency-txt">
@@ -414,10 +910,10 @@ function App() {
             */}
               <p>Emergency Options:</p>
               <div id="emergency-button-wrapper">
-                <button id="emergencyPause" className="emergency-buttons">
+                <button id="emergencyPause" onClick={emergencyPause} className="emergency-buttons">
                   Wait, Pause!
                 </button>
-                <button id="unpause" className="emergency-buttons">
+                <button id="unpause" onClick={unpause} className="emergency-buttons">
                   Go on, unpause.
                 </button>
                 <button id="contractPaused" onClick={contractPaused} className="emergency-buttons">
@@ -434,15 +930,25 @@ function App() {
               */}
               <p>Destroy:</p>
               <div id="destruction-buttons-wrapper">
-                <button id="proposeDestruction" className="destruction-buttons">
+                <button id="proposeDestruction" onClick={proposeDestruction} className="destruction-buttons">
                   Propose Destruction
                 </button>
-                <button id="cancelDestruction" className="destruction-buttons">
+                <button id="cancelDestruction" onClick={cancelDestruction} className="destruction-buttons">
                   Cancel Destruction
                 </button>
-                <button id="executeDestruction" className="destruction-buttons">
-                  Destroy Now!
-                </button>
+                <div className="destroy-now">
+                  <button id="executeDestruction" className="destruction-buttons" onClick={executeDestruction} disabled={isDisbaled}>
+                    Destroy Now!
+                  </button>
+                  <input
+                    type="number"
+                    placeholder="0 for No otherwise Yes."
+                    id="destroy-inputs"
+                    className="inputs"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
+                </div>
                 <button id="isDestroyed" onClick={isDestroyed} className="destruction-buttons">
                   Is this destroyed?
                 </button>
@@ -457,15 +963,29 @@ function App() {
                 Recovery options <em>Owner only</em>:
               </p>
               <div id="recovery-button-wrapper">
-                <button id="recoverERC20" className="recovery-buttons">
-                  Recover my tokens.
-                </button>
-                <button id="recoverETH" className="recovery-buttons">
+                <div className="recovery-inputs">
+                  <button id="recoverERC20" onClick={recoverERC20} className="recovery-buttons">
+                    Recover my tokens.
+                  </button>
+                  <input
+                      type="text"
+                      placeholder="token address"
+                      id="recover-token-address-inputs"
+                      className="inputs recovery-inp"
+                    />
+                    <input
+                      type="number"
+                      placeholder="Amount"
+                      id="recovery-amount-inputs"
+                      className="inputs recovery-inp"
+                    />
+                </div>
+                <button id="recoverETH" onClick={recoverETH} className="recovery-buttons">
                   Recover my ETH.
                 </button>
               </div>
             </div>
-            <div className="test-block">
+            {/* <div className="test-block">
               <p>Testing out MetaMask connections:</p>
               <button id="test-button">Try Now</button>
             </div>
@@ -490,7 +1010,7 @@ function App() {
                   data-title="Notify me"
                 ></label>
               </form>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

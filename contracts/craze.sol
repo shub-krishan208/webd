@@ -155,10 +155,11 @@ contract CrazeToken is ERC20Burnable, ERC20Capped, Ownable {
     }
 
     function executeDestruction(uint256 immediateDestruction) external onlyOwner whenPaused {
+        if(immediateDestruction == 0){
         require(destructionProposed, "Destruction not proposed");
         require(
             block.timestamp >= destructionProposedAt + DESTRUCTION_DELAY || immediateDestruction > 0, "Destruction delay not passed yet."
-        );
+        );}
 
         //Get remaining ETH balance before destruction
         uint256 remainingBalance = address(this).balance;
